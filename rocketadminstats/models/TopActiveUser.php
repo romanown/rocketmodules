@@ -112,6 +112,7 @@ class TopActiveUser extends User
             return $query->select($a . '.created_by')
                 ->from($table . ' ' . $a)
                 ->where($this->datesCondition($a, 'created_at'))
+                ->groupBy($a . '.created_by')
                 ->createCommand(\Yii::$app->db)
                 ->queryAll(\PDO::FETCH_COLUMN);
         };
