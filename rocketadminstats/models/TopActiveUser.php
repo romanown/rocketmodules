@@ -1,8 +1,8 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\models;
+namespace humhub\modules\rocketadminstats\models;
 
-use humhub\libs\DateHelper;
 use humhub\modules\user\models\User;
+use humhub\modules\rocketadminstats\helpers\DbDateParser;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
 
@@ -52,19 +52,27 @@ class TopActiveUser extends User
         $dataProvider->sort->defaultOrder = ['commentsCount' => SORT_DESC];
         $this->load($params);
 
-        if (empty($this->startDate)) {
-            $query->andWhere('c.created_at >= NOW() - INTERVAL 1 DAY');
-        } else {
+        if ($this->startDate && $this->endDate) {
             $query->andWhere(
                 'c.created_at >= :startDate',
-                ['startDate' => DateHelper::parseDateTime($this->startDate)]
+                ['startDate' => DbDateParser::parse($this->startDate)]
             );
-        }
-        if (!empty($this->endDate)) {
             $query->andWhere(
                 'c.created_at <= :endDate',
-                ['endDate' => DateHelper::parseDateTime($this->endDate)]
+                ['endDate' => DbDateParser::parse($this->endDate)]
             );
+        } else if ($this->startDate) {
+            $query->andWhere(
+                'c.created_at >= :startDate',
+                ['startDate' => DbDateParser::parse($this->startDate)]
+            );
+        } else if ($this->endDate) {
+            $query->andWhere(
+                'c.created_at <= :endDate',
+                ['endDate' => DbDateParser::parse($this->endDate)]
+            );
+        } else {
+            $query->andWhere('c.created_at >= NOW() - INTERVAL 1 DAY');
         }
 
         return $dataProvider;
@@ -106,7 +114,7 @@ class TopActiveUser extends User
                 ->leftJoin($this->joinActivity('`like`', 'l'))
                 ->leftJoin($this->joinActivity('comment', 'c'))
                 ->leftJoin($this->joinActivity('post', 'p'))
-                ->where('c.created_at IS NOT NULL')
+                ->orWhere('c.created_at IS NOT NULL')
                 ->orWhere('c.updated_at IS NOT NULL')
                 ->orWhere('l.created_at IS NOT NULL')
                 ->orWhere('l.updated_at IS NOT NULL')
@@ -115,6 +123,7 @@ class TopActiveUser extends User
                 ->createCommand(\Yii::$app->db)
                 ->queryScalar();
         } catch (\Exception $e) {
+            throw $e;
             $result = 0;
         }
 
@@ -131,32 +140,32 @@ JOIN;
 
     private function datesCondition($table, $field)
     {
-        if (empty($this->startDate) && empty($this->endDate)) {
-            $condition = sprintf('%s.%s >= NOW() - INTERVAL 1 DAY', $table, $field);
-        } else if (empty($this->startDate)) {
+        if ($this->startDate && $this->endDate) {
             $condition = sprintf(
-                '%s.%s <= %s',
+                '%s.%s >= "%s" AND %s.%s <= "%s"',
                 $table,
                 $field,
-                DateHelper::parseDateTime($this->endDate)
+                DbDateParser::parse($this->startDate),
+                $table,
+                $field,
+                DbDateParser::parse($this->endDate)
             );
-        } else if (empty($this->endDate)) {
+        } else if ($this->startDate) {
             $condition = sprintf(
-                '%s.%s >= %s',
+                '%s.%s >= "%s"',
                 $table,
                 $field,
-                DateHelper::parseDateTime($this->startDate)
+                DbDateParser::parse($this->startDate)
+            );
+        } else if ($this->endDate) {
+            $condition = sprintf(
+                '%s.%s <= "%s"',
+                $table,
+                $field,
+                DbDateParser::parse($this->endDate)
             );
         } else {
-            $condition = sprintf(
-                '%s.%s >= %s AND %s.%s <= %s',
-                $table,
-                $field,
-                DateHelper::parseDateTime($this->startDate),
-                $table,
-                $field,
-                DateHelper::parseDateTime($this->endDate)
-            );
+            $condition = sprintf('%s.%s >= NOW() - INTERVAL 1 DAY', $table, $field);
         }
 
         return $condition;

@@ -1,5 +1,5 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\models;
+namespace humhub\modules\rocketadminstats\models;
 
 use Yii;
 use yii\base\Model;

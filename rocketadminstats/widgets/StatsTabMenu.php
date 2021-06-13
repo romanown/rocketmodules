@@ -1,5 +1,5 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\widgets;
+namespace humhub\modules\rocketadminstats\widgets;
 
 use Yii;
 use humhub\modules\admin\permissions\ManageGroups;

@@ -1,8 +1,8 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\widgets;
+namespace humhub\modules\rocketadminstats\widgets;
 
 use humhub\components\Widget;
-use rocket\humhub\modules\rocketadminstats\models\traits\DatesFilter;
+use humhub\modules\rocketadminstats\models\traits\DatesFilter;
 
 class DatesRange extends Widget
 {

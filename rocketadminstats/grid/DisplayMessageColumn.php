@@ -1,5 +1,5 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\grid;
+namespace humhub\modules\rocketadminstats\grid;
 
 use Yii;
 use yii\bootstrap\Html;

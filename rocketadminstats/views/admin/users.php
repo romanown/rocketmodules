@@ -4,11 +4,11 @@ use humhub\modules\user\grid\ImageColumn;
 use humhub\widgets\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use rocket\humhub\modules\rocketadminstats\widgets\DatesRange;
-use rocket\humhub\modules\rocketadminstats\helpers\PeriodString;
+use humhub\modules\rocketadminstats\widgets\DatesRange;
+use humhub\modules\rocketadminstats\helpers\PeriodString;
 
 /**
- * @var $searchModel \rocket\humhub\modules\rocketadminstats\models\TopActiveUser
+ * @var $searchModel \humhub\modules\rocketadminstats\models\TopActiveUser
  * @var $dataProvider \yii\data\ActiveDataProvider
  */
 ?>
@@ -17,6 +17,8 @@ use rocket\humhub\modules\rocketadminstats\helpers\PeriodString;
         <div class="panel-body">
             <div class="alert alert-info">
                 <?= Yii::t('RocketadminstatsModule.base', 'Total users enabled: <b>{count}</b>', ['count' => $searchModel->countEnabledUsers()]) ?>
+                <br />
+                <?= Yii::t('RocketadminstatsModule.base', 'Number of users with any activity (comment, post, like, etc.): <b>{count}</b> (filtered)', ['count' => $searchModel->countUsersWithActivity()]) ?>
             </div>
             <h4><?= Yii::t('RocketadminstatsModule.base', 'Top talkers {period}', ['period' => PeriodString::fromModel($searchModel)]) ?></h4>
             <div class="help-block">
@@ -32,9 +34,6 @@ use rocket\humhub\modules\rocketadminstats\helpers\PeriodString;
             <?= DatesRange::widget(['model' => $searchModel]) ?>
             <a href="<?= Url::to(['/rocketadminstats/admin/users']) ?>" class="btn btn-default">Reset to 24h</a>
             <?php ActiveForm::end(); ?>
-            <h5 class="mb-0" style="margin-bottom: 0">
-                <?= Yii::t('RocketadminstatsModule.base', 'Number of users with any activity (comment, post, like, etc.): <b>{count}</b>', ['count' => $searchModel->countUsersWithActivity()]) ?>
-            </h5>
             <div class="table-responsive">
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,

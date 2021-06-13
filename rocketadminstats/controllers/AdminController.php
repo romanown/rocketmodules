@@ -1,12 +1,12 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\controllers;
+namespace humhub\modules\rocketadminstats\controllers;
 
 use Yii;
 use humhub\modules\admin\permissions\ManageModules;
 use humhub\modules\admin\components\Controller;
-use rocket\humhub\modules\rocketadminstats\models\MostCommentedPost;
-use rocket\humhub\modules\rocketadminstats\models\MostLikedComment;
-use rocket\humhub\modules\rocketadminstats\models\TopActiveUser;
+use humhub\modules\rocketadminstats\models\MostCommentedPost;
+use humhub\modules\rocketadminstats\models\MostLikedComment;
+use humhub\modules\rocketadminstats\models\TopActiveUser;
 
 class AdminController extends Controller
 {

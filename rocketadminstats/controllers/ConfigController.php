@@ -1,10 +1,10 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\controllers;
+namespace humhub\modules\rocketadminstats\controllers;
 
 use Yii;
 use humhub\modules\admin\permissions\ManageModules;
 use humhub\modules\admin\components\Controller;
-use rocket\humhub\modules\rocketadminstats\models\AdminStatsSettings;
+use humhub\modules\rocketadminstats\models\AdminStatsSettings;
 
 /**
  * Defines the configure actions.

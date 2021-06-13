@@ -1,6 +1,6 @@
 <?php
 
-namespace  rocket\humhub\modules\rocketadminstats\assets;
+namespace  humhub\modules\rocketadminstats\assets;
 
 use yii\web\AssetBundle;
 

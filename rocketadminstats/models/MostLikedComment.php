@@ -1,8 +1,8 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\models;
+namespace humhub\modules\rocketadminstats\models;
 
-use humhub\libs\DateHelper;
 use humhub\modules\comment\models\Comment;
+use humhub\modules\rocketadminstats\helpers\DbDateParser;
 use yii\data\ActiveDataProvider;
 
 class MostLikedComment extends Comment
@@ -58,19 +58,27 @@ class MostLikedComment extends Comment
         $dataProvider->sort->defaultOrder = ['likesCount' => SORT_DESC];
         $this->load($params);
 
-        if (empty($this->startDate)) {
-            $query->andWhere('l.created_at >= NOW() - INTERVAL 1 DAY');
-        } else {
+        if ($this->startDate && $this->endDate) {
             $query->andWhere(
                 'l.created_at >= :startDate',
-                ['startDate' => DateHelper::parseDateTime($this->startDate)]
+                ['startDate' => DbDateParser::parse($this->startDate)]
             );
-        }
-        if (!empty($this->endDate)) {
             $query->andWhere(
                 'l.created_at <= :endDate',
-                ['endDate' => DateHelper::parseDateTime($this->endDate)]
+                ['endDate' => DbDateParser::parse($this->endDate)]
             );
+        } else if ($this->startDate) {
+            $query->andWhere(
+                'l.created_at >= :startDate',
+                ['startDate' => DbDateParser::parse($this->startDate)]
+            );
+        } else if ($this->endDate) {
+            $query->andWhere(
+                'l.created_at <= :endDate',
+                ['endDate' => DbDateParser::parse($this->endDate)]
+            );
+        } else {
+            $query->andWhere('l.created_at >= NOW() - INTERVAL 1 DAY');
         }
 
         return $dataProvider;

@@ -1,5 +1,5 @@
 <?php
-namespace rocket\humhub\modules\rocketadminstats\helpers;
+namespace humhub\modules\rocketadminstats\helpers;
 
 use Yii;
 

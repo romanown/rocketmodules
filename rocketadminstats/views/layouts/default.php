@@ -1,5 +1,5 @@
 <?php
-use \rocket\humhub\modules\rocketadminstats\widgets\StatsTabMenu;
+use \humhub\modules\rocketadminstats\widgets\StatsTabMenu;
 /**
  * @var $content stirng
  */

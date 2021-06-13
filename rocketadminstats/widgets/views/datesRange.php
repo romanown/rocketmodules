@@ -6,10 +6,10 @@ use humhub\modules\ui\form\widgets\DatePicker;
  */
 ?>
 <label>Start date:
-    <?= DatePicker::widget(['model' => $model, 'attribute' => 'startDate',]) ?>
+    <?= DatePicker::widget(['model' => $model, 'attribute' => 'startDate', 'dateFormat' => 'yyyy-MM-dd']) ?>
 </label>
 <label>End date:
-        <?= DatePicker::widget(['model' => $model, 'attribute' => 'endDate',]) ?>
+        <?= DatePicker::widget(['model' => $model, 'attribute' => 'endDate', 'dateFormat' => 'yyyy-MM-dd']) ?>
 </label>
 <div class="input-group">
 <span class="input-group-btn">

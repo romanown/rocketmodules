@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use humhub\widgets\GridView;
-use rocket\humhub\modules\rocketadminstats\models\MostCommentedPost;
-use rocket\humhub\modules\rocketadminstats\helpers\PeriodString;
-use rocket\humhub\modules\rocketadminstats\widgets\DatesRange;
-use rocket\humhub\modules\rocketadminstats\grid\DisplayMessageColumn;
+use humhub\modules\rocketadminstats\models\MostCommentedPost;
+use humhub\modules\rocketadminstats\helpers\PeriodString;
+use humhub\modules\rocketadminstats\widgets\DatesRange;
+use humhub\modules\rocketadminstats\grid\DisplayMessageColumn;
 
 /**
  * @var $dataProvider \yii\data\ActiveDataProvider

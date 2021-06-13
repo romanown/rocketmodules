@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
- * @var $model \rocket\humhub\modules\rocketadminstats\models\AdminStatsSettings
+ * @var $model \humhub\modules\rocketadminstats\models\AdminStatsSettings
  */
 ?>
 <div class="panel panel-default">
