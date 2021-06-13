@@ -1,0 +1,12 @@
+{
+    "id": "rocketadminstats",
+    "name": "Rocket Admin Stats",
+    "description": "Displays various stats about users activity",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": ["assets/screen1.jpg"]
+}
