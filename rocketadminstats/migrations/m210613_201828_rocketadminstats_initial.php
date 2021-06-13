@@ -22,9 +22,9 @@ class m210613_201828_rocketadminstats_initial extends Migration
 
     public function down()
     {
-        $this->dropIndex($this->userStatusIndex);
-        $this->dropIndex($this->likeCreatedAtIndex);
-        $this->dropIndex($this->postCreatedAtIndex);
-        $this->dropIndex($this->commentCreatedAtIndex);
+        $this->dropIndex($this->userStatusIndex, 'user');
+        $this->dropIndex($this->likeCreatedAtIndex, 'like');
+        $this->dropIndex($this->postCreatedAtIndex, 'post');
+        $this->dropIndex($this->commentCreatedAtIndex, 'comment');
     }
 }
