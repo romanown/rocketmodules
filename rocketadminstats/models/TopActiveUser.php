@@ -107,35 +107,26 @@ class TopActiveUser extends User
      */
     public function countUsersWithActivity()
     {
-        try {
+        $doActivityQuery = function($table, $a) {
             $query = new Query();
-            $result = $query->select('COUNT(DISTINCT u.id)')
-                ->from('user u')
-                ->leftJoin($this->joinActivity('`like`', 'l'))
-                ->leftJoin($this->joinActivity('comment', 'c'))
-                ->leftJoin($this->joinActivity('post', 'p'))
-                ->orWhere('c.created_at IS NOT NULL')
-                ->orWhere('c.updated_at IS NOT NULL')
-                ->orWhere('l.created_at IS NOT NULL')
-                ->orWhere('l.updated_at IS NOT NULL')
-                ->orWhere('p.created_at IS NOT NULL')
-                ->orWhere('p.updated_at IS NOT NULL')
+            return $query->select($a . '.created_by')
+                ->from($table . ' ' . $a)
+                ->where($this->datesCondition($a, 'created_at'))
                 ->createCommand(\Yii::$app->db)
-                ->queryScalar();
+                ->queryAll(\PDO::FETCH_COLUMN);
+        };
+
+        try {
+            $userIds = array_unique(array_merge(
+                $doActivityQuery('like', 'l'),
+                $doActivityQuery('comment', 'c'),
+                $doActivityQuery('post', 'p')
+            ));
         } catch (\Exception $e) {
-            throw $e;
-            $result = 0;
+            $userIds = [];
         }
 
-        return (int)$result;
-    }
-
-    private function joinActivity($table, $a)
-    {
-        return <<<JOIN
-$table $a ON ($a.created_by = u.id AND {$this->datesCondition($a, 'created_at')})
-    OR ($a.updated_by = u.id AND {$this->datesCondition($a, 'updated_at')})
-JOIN;
+        return count($userIds);
     }
 
     private function datesCondition($table, $field)
