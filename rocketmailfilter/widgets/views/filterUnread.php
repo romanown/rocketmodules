@@ -15,6 +15,9 @@ Assets::register($this);
         'id' => 'unread-toggle',
         'category' => 'unread',
         'title' => Yii::t('RocketadminstatsModule.base', 'Unread'),
+        'options' => [
+            'name' => 'unread-toggle',
+        ],
     ]) ?>
     <?= Html::hiddenInput('unread', '0', [
         'data-filter-id' => 'unread',
@@ -22,4 +25,12 @@ Assets::register($this);
         'data-filter-type' => 'text',
     ]) ?>
     <?php ActiveForm::end() ?>
+    <div class="form-check hidden">
+        <label class="form-check-label rocketmailfilter-check-label col-form-label-sm">
+            <?= Html::checkbox('unread-cosmetic', false, [
+                'id' => 'rocketmailfilter-filter-checkbox',
+            ]) ?>
+            <?= Yii::t('RocketadminstatsModule.base', 'Show unread only') ?>
+        </label>
+    </div>
 <?= Html::endTag('div') ?>

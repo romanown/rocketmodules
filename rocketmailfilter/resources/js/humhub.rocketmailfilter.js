@@ -8,6 +8,8 @@ humhub.module('rocketmailfilter.unread', function(module, require, $) {
     MyFilter.prototype.init = function() {
         this.hiddenInput = this.$.find('[name=unread]');
         this.mailFilterForm = Widget.instance('#mail-filter-root').$.find('form');
+        this.mainCheckbox = this.$.find('[name=unread-toggle]');
+        this.cosmeticCheckbox = this.addFakeCosmeticCheckbox();
         this.placeUnreadToggle();
     };
 
@@ -19,6 +21,7 @@ humhub.module('rocketmailfilter.unread', function(module, require, $) {
 
     MyFilter.prototype.triggerChange = function() {
         this.toggleInputValue();
+        this.cosmeticCheckbox.prop('checked', this.isChecked());
         if (this.isChecked()) {
             this.addFakeInput();
         } else {
@@ -38,8 +41,21 @@ humhub.module('rocketmailfilter.unread', function(module, require, $) {
         this.mailFilterForm.find('[name="unread"]').remove();
     };
 
+    MyFilter.prototype.addFakeCosmeticCheckbox = function() {
+        var self = this;
+        var checkbox = $('#rocketmailfilter-filter-checkbox');
+        var parentDiv = checkbox.closest('div.form-check');
+        this.mailFilterForm.prepend(parentDiv);
+        parentDiv.removeClass('hidden');
+        checkbox.on('change', function() {
+            self.mainCheckbox.click();
+        });
+
+        return checkbox;
+    };
+
     MyFilter.prototype.toggleInputValue = function() {
-        this.hiddenInput.val(this.isChecked() ? "0" : "1")
+        this.hiddenInput.val(this.isChecked() ? "0" : "1");
     };
 
     MyFilter.prototype.isChecked = function () {
