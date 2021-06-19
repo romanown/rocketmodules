@@ -1,0 +1,13 @@
+{
+  "name": "humhub-rocketmodules-rocketmailfilter",
+  "version": "2.0.5",
+  "description": "HumHum module. Unread filter extension for HumHub mail module.",
+  "dependencies": {},
+  "author": "Pavel",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}

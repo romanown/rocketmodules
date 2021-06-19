@@ -1,0 +1,12 @@
+{
+    "id": "rocketmailfilter",
+    "name": "Rocket Mail Filter",
+    "description": "Extension for HumHub mail module. Allows to filter conversation section for unread/new messages",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": []
+}
