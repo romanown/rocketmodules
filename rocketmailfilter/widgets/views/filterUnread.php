@@ -14,7 +14,7 @@ Assets::register($this);
     <?= CheckboxFilterInput::widget([
         'id' => 'unread-toggle',
         'category' => 'unread',
-        'title' => Yii::t('RocketadminstatsModule.base', 'Unread'),
+        'title' => Yii::t('RocketmailfilterModule.base', 'Unread'),
         'options' => [
             'name' => 'unread-toggle',
         ],
@@ -30,7 +30,7 @@ Assets::register($this);
             <?= Html::checkbox('unread-cosmetic', false, [
                 'id' => 'rocketmailfilter-filter-checkbox',
             ]) ?>
-            <?= Yii::t('RocketadminstatsModule.base', 'Show unread only') ?>
+            <?= Yii::t('RocketmailfilterModule.base', 'Show unread only') ?>
         </label>
     </div>
 <?= Html::endTag('div') ?>
