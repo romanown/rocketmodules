@@ -15,6 +15,7 @@ Assets::register($this);
             <?= Html::checkbox('unread', false, [
                 'id' => 'rocketmailfilter-filter-checkbox',
                 'data-filter-id' => 'unread',
+                'data-filter-type' => 'text',
                 'data-filter-term' => 'unread',
                 'data-filter-category' => 'unread',
             ]) ?>
