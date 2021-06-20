@@ -29,7 +29,7 @@ class Assets extends AssetBundle
     ];
 
     public $js = [
-        'js/humhub.rocketmailfilter.min.js',
+        'js/humhub.rocketmailfilter.min.js?v=0.2',
     ];
 
     public $css = [
