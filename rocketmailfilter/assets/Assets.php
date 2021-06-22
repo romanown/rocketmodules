@@ -25,11 +25,11 @@ class Assets extends AssetBundle
     * @var array change forceCopy to true when testing your js in order to rebuild this assets on every request (otherwise they will be cached)
     */
     public $publishOptions = [
-        'forceCopy' => true,
+        'forceCopy' => false,
     ];
 
     public $js = [
-        'js/humhub.rocketmailfilter.min.js?v=0.2',
+        'js/humhub.rocketmailfilter.min.js?v=0.21',
     ];
 
     public $css = [

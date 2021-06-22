@@ -1,6 +1,6 @@
 {
   "name": "humhub-rocketmodules-rocketmailfilter",
-  "version": "0.2",
+  "version": "0.21",
   "description": "HumHum module. Unread filter extension for HumHub mail module.",
   "dependencies": {},
   "author": "Pavel",

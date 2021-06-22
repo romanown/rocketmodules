@@ -4,7 +4,7 @@
     "description": "Extension for HumHub mail module. Allows to filter conversation section for unread/new messages",
     "keywords": [
     ],
-    "version": "0.2",
+    "version": "0.21",
     "humhub": {
         "minVersion": "1.2"
     },

@@ -10,14 +10,15 @@ Assets::register($this);
 ?>
 
 <?= Html::beginTag('div', $options) ?>
+    <?= Html::hiddenInput('unread', '0', [
+        'data-filter-id' => 'unread',
+        'data-filter-category' => 'unread',
+        'data-filter-type' => 'text',
+    ]) ?>
     <div class="form-check">
         <label class="form-check-label rocketmailfilter-check-label col-form-label-sm">
-            <?= Html::checkbox('unread', false, [
-                'id' => 'rocketmailfilter-filter-checkbox',
-                'data-filter-id' => 'unread',
-                'data-filter-type' => 'text',
-                'data-filter-term' => 'unread',
-                'data-filter-category' => 'unread',
+            <?= Html::checkbox('unread-toggle', false, [
+                'id' => 'rocketmailfilter-unread-toggle',
             ]) ?>
             <?= Yii::t('RocketmailfilterModule.base', 'Show unread only') ?>
         </label>
