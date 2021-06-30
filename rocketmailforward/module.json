@@ -1,0 +1,12 @@
+{
+    "id": "rocketmailforward",
+    "name": "Rocket Mail Forward",
+    "description": "Extension for HumHub mail module. Allows to forward user messages to the configured web endpoints",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": []
+}

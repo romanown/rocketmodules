@@ -19,7 +19,7 @@ class Events
             'group' => 'manage',
             'icon' => '<i class="fa fa-rocket"></i>',
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'rocketadminstats' && Yii::$app->controller->id == 'admin'),
-            'sortOrder' => 99999,
+            'sortOrder' => 88800,
         ]);
     }
 }
