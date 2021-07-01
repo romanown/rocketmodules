@@ -132,6 +132,7 @@ class AdminController extends Controller
         if (!empty($post['MailForward']['user_id'])) {
             $userIdOrGuid = $post['MailForward']['user_id'][0];
             if (is_numeric($userIdOrGuid)) {
+                $post['MailForward']['user_id'] = $userIdOrGuid;
                 return $post;
             }
             $user = User::find()
@@ -144,7 +145,7 @@ class AdminController extends Controller
             }
         }
 
-        throw new \RuntimeException('[rocketmailforward] Can\'t find user');
+        return $post;
     }
 
     /**
