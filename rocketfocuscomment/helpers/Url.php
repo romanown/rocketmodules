@@ -8,9 +8,9 @@ class Url extends BaseUrl
     public static function withGetParam($url, $param, $value)
     {
         $parsed = parse_url($url);
-        $processed = ($parsed['scheme'] ? $parsed['scheme'] . '://' : '')
+        $processed = (empty($parsed['scheme']) ? '' :  $parsed['scheme'] . '://')
             . ($parsed['host'] ?? '')
-            . ($parsed['port'] ? ':' . $parsed['port'] : '')
+            . (empty($parsed['port']) ? '' : ':' . $parsed['port'])
             . ($parsed['path'] ?? '');
         $queryParams = [];
         parse_str($parsed['query'], $queryParams);
