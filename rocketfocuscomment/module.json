@@ -1,0 +1,12 @@
+{
+    "id": "rocketfocuscomment",
+    "name": "Rocket Focus Comment",
+    "description": "Allows to go directly to the post comment from the notification",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": []
+}
