@@ -24,7 +24,7 @@ class CommentController extends BaseController
         $commentModule = Yii::$app->getModule('comment');
         $parentCommentId = Comment::getParentCommentId($focusedCommentId);
 
-        $query = Comment::find();
+        $query = BaseComment::find();
         if ($parentCommentId) {
             if ($this->isRequestForNestedComments() && $this->target->id === $parentCommentId) {
                 $query->orderBy(sprintf('`comment`.`id` = "%d" DESC', $focusedCommentId));
@@ -52,6 +52,7 @@ class CommentController extends BaseController
         Comment::$focusFetched = true;
         $output = ShowMore::widget(['pagination' => $pagination, 'object' => $this->target]);
         foreach ($comments as $comment) {
+//            $comment->object_model = BaseComment::class;
             $output .= CommentWidget::widget(['comment' => $comment]);
         }
 

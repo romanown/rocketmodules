@@ -27,6 +27,12 @@ class Comments extends BaseComments
             $comments = CommentModel::GetCommentsLimited($objectModel, $objectId, $module->commentsPreviewMax);
         }
 
+        foreach ($comments as $comment) {
+            if ($comment->object_model === CommentModel::class) {
+                $comment->object_model = BaseCommentModel::class;
+            }
+        }
+
         $isLimited = ($commentCount > $module->commentsPreviewMax);
         return $this->render($this->template, [
             'object' => $this->object,
