@@ -10,7 +10,7 @@ Change the `%root%/protected/config/common.php` file as follows:
 <?php // %root%/protected/config/common.php
 return [
     'params' => [
-        'moduleAutoloadPaths' => ['@app/modules', '@humhub/modules', '@app/rocketmodules'],
+        'moduleAutoloadPaths' => ['@app/rocketmodules'],
     ],
 ];
 ```
