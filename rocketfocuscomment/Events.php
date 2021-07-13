@@ -5,12 +5,16 @@ use humhub\libs\WidgetCreateEvent;
 use humhub\modules\comment\models\Comment;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\rocketfocuscomment\assets\FocusCommentAssets;
+use humhub\modules\rocketfocuscomment\models\Comment as ExtendedComment;
 use humhub\modules\rocketfocuscomment\helpers\Url;
+use humhub\modules\rocketfocuscomment\widgets\CommentLink;
 use humhub\modules\rocketfocuscomment\widgets\Comments;
 use humhub\components\Response;
 use Yii;
 use yii\base\Action;
 use yii\base\ActionEvent;
+use yii\base\ModelEvent;
+use yii\db\AfterSaveEvent;
 
 class Events
 {
@@ -38,6 +42,11 @@ class Events
     public static function onCommentsWidgetCreate(WidgetCreateEvent $event)
     {
         $event->config['class'] = Comments::class;
+    }
+
+    public static function onCommentLinkWidgetCreate(WidgetCreateEvent $event)
+    {
+        $event->config['class'] = CommentLink::class;
     }
 
     public static function onNotificationEntryRedirect(ActionEvent $event)
@@ -149,5 +158,19 @@ class Events
     public static function urlParam()
     {
         return Yii::$app->getModule('rocketfocuscomment')->commentIdParam;
+    }
+
+    public static function onCommentInserted(AfterSaveEvent $event)
+    {
+        /** @var Comment $comment */
+        $comment = $event->sender;
+        ExtendedComment::flushCommentCacheFull($comment);
+    }
+
+    public static function onCommentDeleted(ModelEvent $event)
+    {
+        /** @var Comment $comment */
+        $comment = $event->sender;
+        ExtendedComment::flushCommentCacheFull($comment);
     }
 }

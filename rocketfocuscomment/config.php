@@ -30,6 +30,11 @@ return [
             'callback' => [Events::class, 'onCommentsWidgetCreate'],
         ],
         [
+            'class' => '\humhub\modules\comment\widgets\CommentLink',
+            'event' => \humhub\components\Widget::EVENT_CREATE,
+            'callback' => [Events::class, 'onCommentLinkWidgetCreate'],
+        ],
+        [
             'class' => \humhub\modules\notification\controllers\EntryController::class,
             'event' => \humhub\modules\notification\controllers\EntryController::EVENT_AFTER_ACTION,
             'callback' => [Events::class, 'onNotificationEntryRedirect'],
@@ -43,6 +48,16 @@ return [
             'class' => \humhub\modules\comment\controllers\CommentController::class,
             'event' => \humhub\components\Controller::EVENT_BEFORE_ACTION,
             'callback' => [Events::class, 'onCommentShowAction']
+        ],
+        [
+            'class' => \humhub\modules\comment\models\Comment::class,
+            'event' => \humhub\modules\comment\models\Comment::EVENT_AFTER_INSERT,
+            'callback' => [Events::class, 'onCommentInserted']
+        ],
+        [
+            'class' => \humhub\modules\comment\models\Comment::class,
+            'event' => \humhub\modules\comment\models\Comment::EVENT_AFTER_DELETE,
+            'callback' => [Events::class, 'onCommentDeleted']
         ],
 	],
 ];

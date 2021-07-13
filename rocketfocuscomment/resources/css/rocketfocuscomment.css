@@ -2,7 +2,7 @@
 .rocketfocuscomment-focus .comment-message {background: rgba(250, 116, 79, 0.55);}
 /* Custom theme styles */
 .rocketfocuscomment-focus .comment-frame .comment-frame-body .comment-message {background: none;}
-@media (max-width: 1200px) {.rocketfocuscomment-focus > .comment-frame .comment-frame-body {border: 2px solid #FA744F;}}
+@media (max-width: 1200px) {.rocketfocuscomment-focus > .comment-frame .comment-frame-body {border: 2px solid #FA744F; border-radius: 8px;}}
 @media (min-width: 1201px) {
     .rocketfocuscomment-focus > .comment-frame .media-body, .rocketfocuscomment-focus > .comment-frame .content {border-color: #FA744F; border-style: solid}
     .rocketfocuscomment-focus > .comment-frame .media-body {border-width: 2px 2px 0 2px;}
