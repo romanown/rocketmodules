@@ -54,6 +54,7 @@ humhub.module('rocketfocuscomment.main', function(module, require, $) {
 
     var registerCommentExtension = function() {
         event.on('humhub:modules:comment:afterInit', function(evt, m) {
+            var scrolled = false;
             var $postContainer = $('#layout-content');
             if ($postContainer.data('observer')) {
                 $postContainer.data('observer').disconnect();
@@ -61,12 +62,35 @@ humhub.module('rocketfocuscomment.main', function(module, require, $) {
             var mutationConfig = { attributes: false, childList: true, subtree: true };
             var observer = new MutationObserver(function () {
                 var selector = getFocusedCommentSelector();
-                selector && $(selector).addClass('rocketfocuscomment-focus');
+                var $comment = $(selector);
+                if ($comment.length) {
+                    $comment.addClass('rocketfocuscomment-focus');
+                    if (!scrolled) {
+                        scrollToFocusedComment();
+                        scrolled = true;
+                    }
+                }
             });
             $postContainer.data('observer', observer);
             observer.observe($postContainer[0], mutationConfig);
             module.log.debug('Mutation observer initialized');
+            $(document).on('pjax:end', function() {
+                scrolled = false;
+            })
         });
+    };
+
+    var scrollToFocusedComment = function() {
+        var $comment = $(getFocusedCommentSelector());
+        if (!$comment.length) return;
+        var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
+        var top = $comment.offset().top;
+        console.log("MY scrolled");
+        if (isSmoothScrollSupported) {
+            window.scrollTo({top: top, behavior: "smooth"});
+        } else {
+            window.scrollTo(0, top);
+        }
     };
 
     var init = function() {

@@ -1,8 +1,6 @@
 <?php
 
 use humhub\modules\rocketfocuscomment\Events;
-use humhub\modules\admin\widgets\AdminMenu;
-use humhub\widgets\TopMenu;
 
 return [
 	'id' => 'rocketfocuscomment',

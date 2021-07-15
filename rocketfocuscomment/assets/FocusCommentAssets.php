@@ -37,10 +37,10 @@ class FocusCommentAssets extends AssetBundle
     ];
 
     public $js = [
-        'js/humhub.rocketfocuscomment.main.js?v=0.2',
+        'js/humhub.rocketfocuscomment.main.js?v=0.3',
     ];
 
     public $css = [
-        'css/rocketfocuscomment.css?v=0.2',
+        'css/rocketfocuscomment.css?v=0.3',
     ];
 }
